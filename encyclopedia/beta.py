@@ -22,8 +22,6 @@ def ul_repl(m):
     text = m.group('text')
     return f'<ul>{text}</ul>'
 
-
-
 h_pattern = re.compile(r'^(?P<hash>#{1,3})\s(?P<text>.*)', re.M)
 p_pattern = re.compile(r'^(?P<text>[^*#\n-]+)', re.M)
 li_pattern = re.compile(r'^(\*|-)\s(?P<text>.*)', re.M)
@@ -58,4 +56,5 @@ The most recent major version of HTML is HTML5.
 # print(re.sub(ul, ul_repl, content))
 # print(re.findall(ul, content))
 
-print(__name__)
+s = 'H434RF3'
+print(s.lower())

@@ -35,9 +35,3 @@ def get_entry(title):
         return f.read().decode("utf-8")
     except FileNotFoundError:
         return None
-
-
-# def md_to_html(title):
-#     md_file = get_entry(title)
-#     if md_file:
-#         with open()
