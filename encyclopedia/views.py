@@ -29,12 +29,12 @@ def search(request):
         form = forms.SearchForm(request.GET)
         
         if form.is_valid():
-            query = form.cleaned_data['query'].lower()
+            query = form.cleaned_data['q'].lower()
             entries = util.list_entries()
 
-            results = [result.lower() for result in entries if query in result.lower()]
+            results = [result for result in entries if query in result.lower()]
             len_results = len(results)
-
+            print(f'len_results: {len_results}')
             # No matching result found
             if len_results == 0:
                 return render(request, 'encyclopedia/result.html', {
@@ -42,7 +42,7 @@ def search(request):
                     'form': form
                 })
             
-            elif len_results == 1 and results[0] == query:
+            elif len_results == 1 and results[0].lower() == query:
                 return HttpResponseRedirect(reverse('entry', args=[query]))
 
             else:
@@ -52,9 +52,9 @@ def search(request):
                     return HttpResponseRedirect(reverse('entry', args=[query]))
                 else:
                     return render(request, 'encyclopedia/result.html', {
+                        'multi_results': f'{len_results} results found',
                         'results': results,
-                        'form': form,
-                        'multi_results': f'{len_results} results found'
+                        'form': form
                     })
         else:
             return HttpResponseRedirect(reverse('index'))
