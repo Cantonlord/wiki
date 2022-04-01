@@ -6,10 +6,13 @@
 
 
 {% block body %}
-
-    <h1>{{ multi_results }}</h1>
-    <h1>{{ none_result }}</h1>
-
+    {% if multi_results %}
+        <h1>{{ multi_results }}</h1>
+    {% endif %}
+    {% if none_result %}
+        <h1>{{ none_result }}</h1>
+    {% endif %}
+    {% if results %}
     <ul>
         {% for result in results %}
         <li>
@@ -17,4 +20,5 @@
         </li>
         {% endfor %}
     </ul>
+    {% endif %}
 {% endblock %}

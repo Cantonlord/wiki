@@ -6,3 +6,14 @@ class SearchForm(forms.Form):
         'class': 'search',
         'placeholder': "Search Encyclopedia"
     }))
+
+class CreateForm(forms.Form):
+    title = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'title',
+        'placeholder': "Title..."
+    }))
+    content = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'content',
+        'placeholder': "Content..."
+    }))
+    

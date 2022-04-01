@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<str:title>/', views.entry, name='entry'),
     path('search', views.search, name='search'),
+    path('create', views.create, name='create'),
     
     # re_path(r'(?P<title>\w+)/$', views.entry, name='entry'),
 ]
