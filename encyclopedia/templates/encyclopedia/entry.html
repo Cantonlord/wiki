@@ -9,7 +9,7 @@
     {{ content|safe }}
     <form action="{% url 'edit' title %}" method="post">
         {% csrf_token %}
-        <input type="submit", value="Edit">
+        <button type="submit">Edit</button>
     </form>
 
 
