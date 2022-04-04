@@ -17,3 +17,10 @@ class CreateForm(forms.Form):
         'placeholder': "Content..."
     }))
     
+class EditForm(forms.Form):
+    title = forms.CharField(label='Title', widget=forms.TextInput(attrs={
+        'class': 'title'
+    }))
+    content = forms.CharField(label='Content', widget=forms.TextInput(attrs={
+        'class': 'content'
+    }))

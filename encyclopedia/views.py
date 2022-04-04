@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.contrib import messages
 from . import util, forms
 import random, markdown2
 
@@ -18,7 +19,8 @@ def entry(request, title):
     if content:
         return render(request, 'encyclopedia/entry.html', {
             'content': markdown2.markdown(content),
-            'form': search_form
+            'form': search_form,
+            'title': title
         })
     else:
         return render(request, 'encyclopedia/error.html', {
@@ -82,3 +84,34 @@ def create(request):
             'create_form': create_form,
             'form': search_form
         })
+
+
+def edit(request, title):
+    if request.method == 'POST':
+        entry = util.get_entry(title)
+        existed_edit_form = forms.EditForm(initial={'title': title, 'content': entry})
+        return render(request, 'encyclopedia/edit.html', {
+                'edit_form': existed_edit_form,
+                'form': search_form,
+                'title': title
+            })
+    
+
+def save(request, title):
+    if request.method == 'POST':
+        form = forms.EditForm(request.POST)
+        if form.is_valid():
+            edit_title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            if title == edit_title:
+                util.save_entry(title, content)
+                return HttpResponseRedirect(reverse('entry', args=[title]))
+            else:
+                util.save_entry(edit_title, content)
+                return HttpResponseRedirect(reverse('entry', args=[edit_title]))
+
+def random_page(request):
+    entries = util.list_entries()
+    if entries:
+        entry = entries[random.randint(0, len(entries) - 1)]
+        return redirect('entry', entry)
