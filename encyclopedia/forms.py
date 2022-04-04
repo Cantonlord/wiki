@@ -12,15 +12,15 @@ class CreateForm(forms.Form):
         'class': 'title',
         'placeholder': "Title..."
     }))
-    content = forms.CharField(label='', widget=forms.TextInput(attrs={
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={
         'class': 'content',
         'placeholder': "Content..."
     }))
     
 class EditForm(forms.Form):
-    title = forms.CharField(label='Title', widget=forms.TextInput(attrs={
+    title = forms.CharField(label='', widget=forms.TextInput(attrs={
         'class': 'title'
     }))
-    content = forms.CharField(label='Content', widget=forms.TextInput(attrs={
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={
         'class': 'content'
     }))
